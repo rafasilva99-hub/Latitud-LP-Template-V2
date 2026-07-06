@@ -1,0 +1,348 @@
+.hero {
+  position: relative;
+  min-height: 675px;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  padding: 180px 0 96px;
+  background: var(--black);
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(21, 43, 73, .86) 0%, rgba(19, 23, 26, .62) 45%, rgba(19, 23, 26, .18) 100%),
+    url("../../assets/img/hero-work-at-height.png") center / cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(32vw, 430px);
+  height: 120px;
+  background: var(--orange-500);
+  clip-path: polygon(0 48%, 100% 100%, 0 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.hero h1 {
+  margin: 16px 0 20px;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 600;
+  line-height: var(--lh-hero);
+  letter-spacing: var(--tracking-display);
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, .88);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+  gap: 64px;
+  align-items: center;
+}
+
+.about-copy h2 {
+  margin: 12px 0 18px;
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 3vw, 36px);
+  line-height: 1.22;
+}
+
+.about-copy p {
+  margin: 0 0 28px;
+  font-size: 18px;
+}
+
+.chips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+}
+
+.about-panel {
+  position: relative;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+  background:
+    linear-gradient(180deg, rgba(31, 58, 95, .18), rgba(19, 23, 26, .78)),
+    url("../../assets/img/hero-work-at-height.png") center / cover;
+}
+
+.about-panel::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -70px;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: var(--orange-500) url("../../Logos/Pattern - Orange.png") center / 230px;
+  opacity: .95;
+}
+
+.navy-band {
+  background: var(--blue-50);
+  color: #fff;
+}
+
+.navy-band .section__title,
+.navy-band .section__text {
+  color: #fff;
+}
+
+.navy-band .section__text {
+  color: rgba(255, 255, 255, .82);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  gap: 64px;
+  align-items: center;
+}
+
+.step-list {
+  display: grid;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 22px;
+}
+
+.step__number {
+  color: var(--blue-50);
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 1.32;
+}
+
+.step p {
+  margin: 0;
+}
+
+.lat-diagram {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at center, #fff 0 36%, rgba(255, 255, 255, .72) 37% 45%, transparent 46%),
+    conic-gradient(from -30deg, var(--blue-50), var(--orange-500), var(--action-blue), var(--blue-50));
+  color: var(--blue-50);
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.social-proof {
+  text-align: center;
+}
+
+.stars {
+  color: var(--orange-500);
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+
+.social-proof blockquote {
+  max-width: 800px;
+  margin: 18px auto 38px;
+  color: var(--text-body);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.logo-marquee {
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-marquee::before,
+.logo-marquee::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  pointer-events: none;
+}
+
+.logo-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0));
+}
+
+.logo-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #fff, rgba(255, 255, 255, 0));
+}
+
+.logo-marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 48px;
+  animation: marquee 26s linear infinite;
+}
+
+.logo-marquee span {
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cta-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+  background:
+    linear-gradient(90deg, rgba(21, 43, 73, .92), rgba(19, 23, 26, .88)),
+    url("../../assets/img/hero-work-at-height.png") center / cover;
+  color: #fff;
+}
+
+.cta-panel::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -80px;
+  width: 260px;
+  height: 520px;
+  background: url("../../Logos/Pattern II - Black.png") center / contain repeat-y;
+  opacity: .16;
+}
+
+.cta-panel__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+  gap: 56px;
+  align-items: center;
+  min-height: 420px;
+  padding: 48px;
+}
+
+.cta-panel h2 {
+  max-width: 620px;
+  margin: 14px 0 16px;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 3vw, 36px);
+  line-height: 1.22;
+}
+
+.cta-panel p {
+  max-width: 590px;
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, .85);
+  font-size: 18px;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 620px;
+    padding-top: 136px;
+  }
+
+  .hero h1 {
+    line-height: 44px;
+  }
+
+  .hero p {
+    font-size: 18px;
+  }
+
+  .about-grid,
+  .steps,
+  .cta-panel__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-panel__inner {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 680px;
+    padding-bottom: 72px;
+  }
+
+  .hero__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .chips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-panel {
+    min-height: 340px;
+  }
+}

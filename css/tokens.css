@@ -1,0 +1,42 @@
+:root {
+  --blue-25: #323B6A;
+  --blue-50: #1F3A5F;
+  --blue-100: #152B49;
+  --blue-200: #181D27;
+  --orange-500: #F18819;
+  --orange-400: #EFA016;
+  --orange-300: #F4BA5D;
+  --black: #13171A;
+
+  --bg-white: #FFFFFF;
+  --surface-hover: #FAFAFA;
+  --bg-blue-light: #EFF4FF;
+  --surface-dark: var(--black);
+
+  --text-heading: var(--blue-200);
+  --text-body: #535862;
+  --text-muted: #717680;
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-soft: rgba(255, 255, 255, .80);
+  --text-topbar: #D5D7DA;
+
+  --action-blue: #155EEF;
+  --border-light: #E9EAEB;
+  --border-on-dark: rgba(255, 255, 255, .12);
+  --focus-ring: rgba(241, 136, 25, .45);
+
+  --font-heading: "Raleway", "Inter", Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
+  --tracking-display: 0;
+  --tracking-tag: .06em;
+  --lh-hero: 56px;
+
+  --container: 1216px;
+  --section-py: 96px;
+  --section-py-mobile: 64px;
+
+  --radius-btn: 12px;
+  --radius-card: 16px;
+  --radius-panel: 24px;
+  --shadow-card: 0 1px 3px rgba(16, 24, 40, .06);
+}

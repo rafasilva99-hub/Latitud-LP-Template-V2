@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="chevron-down-double">
+<g id="Icon">
+<path d="M7 13L12 18L17 13" fill="var(--fill-0, white)"/>
+<path d="M7 13L12 18L17 13" fill="var(--fill-1, white)"/>
+<path d="M7 6L12 11L17 6" fill="var(--fill-0, white)"/>
+<path d="M7 6L12 11L17 6" fill="var(--fill-1, white)"/>
+</g>
+</g>
+</svg>

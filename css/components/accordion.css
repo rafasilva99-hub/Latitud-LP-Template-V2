@@ -1,0 +1,80 @@
+.accordion {
+  border-top: 1px solid var(--border-light);
+}
+
+.accordion__item {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.accordion__item summary {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--text-heading);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.accordion__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion__item summary::after {
+  content: "";
+  display: grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background:
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 5V19M5 12H19' stroke='%231F3A5F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 18px 18px no-repeat;
+}
+
+.accordion__item[open] summary::after {
+  background:
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12H19' stroke='%231F3A5F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 18px 18px no-repeat;
+}
+
+.accordion__item p {
+  max-width: 760px;
+  margin: -8px 0 24px;
+}
+
+.accordion__item summary::after {
+  transition: transform .24s ease, border-color .24s ease, background-color .24s ease;
+}
+
+.accordion__item[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.accordion__panel {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    height .34s cubic-bezier(.22, 1, .36, 1),
+    opacity .24s ease,
+    transform .34s cubic-bezier(.22, 1, .36, 1);
+}
+
+.accordion__item[open] .accordion__panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.accordion__item.is-opening .accordion__panel,
+.accordion__item.is-closing .accordion__panel {
+  opacity: 0;
+  transform: translateY(-4px);
+}
