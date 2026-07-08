@@ -161,12 +161,12 @@
 
 .floating-whatsapp {
   position: fixed;
-  right: 28px;
-  bottom: 28px;
+  right: 20px;
+  bottom: 88px;
   z-index: 30;
   display: grid;
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   place-items: center;
   border-radius: 999px;
   background: linear-gradient(180deg, #2FE36F 0%, #22C55E 100%);
@@ -177,8 +177,8 @@
 }
 
 .floating-whatsapp svg {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   fill: #FFFFFF;
 }
 
@@ -197,44 +197,44 @@
   inset-inline: 0;
   bottom: 0;
   z-index: 19;
-  display: none;
+  display: block;
   padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
   background: rgba(255, 255, 255, .96);
   border-top: 1px solid var(--border-light);
 }
 
-@media (max-width: 768px) {
+.mobile-sticky .btn {
+  width: 100%;
+  min-height: 52px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.mobile-sticky .cta-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.mobile-sticky .cta-wrapper .btn {
+  padding: 14px 18px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media (min-width: 48rem) {
   .mobile-sticky {
-    display: block;
-  }
-
-  .mobile-sticky .btn {
-    width: 100%;
-    min-height: 52px;
-    font-size: 16px;
-    line-height: 20px;
-  }
-
-  .mobile-sticky .cta-wrapper {
-    display: flex;
-    width: 100%;
-  }
-
-  .mobile-sticky .cta-wrapper .btn {
-    padding: 14px 18px;
-    font-size: 16px;
-    line-height: 20px;
+    display: none;
   }
 
   .floating-whatsapp {
-    right: 20px;
-    bottom: 88px;
-    width: 54px;
-    height: 54px;
+    right: 28px;
+    bottom: 28px;
+    width: 60px;
+    height: 60px;
   }
 
   .floating-whatsapp svg {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
   }
 }

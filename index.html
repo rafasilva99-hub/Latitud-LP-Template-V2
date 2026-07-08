@@ -68,91 +68,66 @@
     </header>
 
     <main class="service-lp service-lp--pintura-predial" data-template="service-lp-v1">
-      <section class="lp-hero lp-hero--service" id="topo" aria-labelledby="hero-title">
-        <div class="lp-hero__media" aria-hidden="true"></div>
-        <div class="lp-hero__overlay" aria-hidden="true"></div>
-
+      <section class="lp-hero" id="topo" aria-labelledby="hero-title">
         <div class="container lp-hero__grid">
+          <div class="lp-hero__media">
+            <img src="assets/img/facade-painting-hero.png" alt="Equipe realizando pintura de fachada predial">
+          </div>
           <div class="lp-hero__content">
-            <p class="lp-hero__proof">12 anos de experiência | Atendimento em todo o estado de São Paulo</p>
+            <p class="lp-hero__proof">12 anos de experiência | Atendimento em todo o estado de São Paulo | 5 anos de garantia contratual</p>
             <h1 id="hero-title">Sua fachada precisa de uma nova pintura. Sua gestão precisa de uma obra previsível.</h1>
             <p class="lp-hero__text">Uma obra de pintura predial vai muito além da renovação da fachada. Ela exige planejamento, comunicação, segurança, documentação e organização para acontecer com o menor impacto possível na rotina do condomínio.</p>
-            <p class="lp-hero__text">Por isso, a LATITUD desenvolveu um método próprio que permite acompanhar cada etapa da execução com mais previsibilidade, transparência e controle.</p>
-            <ul class="lp-hero__checklist" aria-label="O que você acompanha durante toda a obra">
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                Cronograma estruturado
-              </li>
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                Comunicação organizada
-              </li>
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                Registro diário da execução
-              </li>
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                Documentação técnica
-              </li>
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                Entrega formal com DataBook
-              </li>
-              <li>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                5 anos de garantia contratual
-              </li>
-            </ul>
-          </div>
-
-          <aside class="lead-card" aria-labelledby="lead-card-title">
-            <p class="eyebrow eyebrow--compact">Diagnóstico técnico</p>
-            <h2 id="lead-card-title">Receba uma avaliação da sua fachada</h2>
-            <p>Conheça o escopo mais adequado para o seu condomínio antes de comparar propostas.</p>
-            <form class="lead-form" id="diagnostico-form" data-form>
-              <div class="lead-form__field">
-                <label for="nome">Nome <span aria-hidden="true">*</span></label>
-                <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome completo" required>
-              </div>
-              <div class="lead-form__field">
-                <label for="whatsapp">WhatsApp <span aria-hidden="true">*</span></label>
-                <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="(11) 99999-0000" required>
-              </div>
-              <div class="lead-form__field">
-                <label for="condominio">Condomínio ou empresa</label>
-                <input id="condominio" name="condominio" type="text" autocomplete="organization" placeholder="Nome do condomínio ou empresa">
-              </div>
-              <div class="lead-form__field">
-                <label for="cidade">Cidade</label>
-                <input id="cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Ex.: São Paulo">
-              </div>
-              <button class="btn btn--primary lead-form__submit" type="submit">
-                Agendar diagnóstico técnico
+            <p class="lp-hero__text">Por isso, a LATITUD desenvolveu um método próprio que permite acompanhar cada etapa da execução com mais previsibilidade, transparência e controle, reduzindo a necessidade de intervenção do síndico e oferecendo mais segurança para a gestão durante toda a obra.</p>
+            <div class="cta-wrapper">
+              <a class="btn btn--primary" href="#diagnostico-form">
+                Solicitar um diagnóstico técnico
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M7 17L17 7"></path>
                   <path d="M7 7h10v10"></path>
                 </svg>
-              </button>
-              <p class="lead-form__microcopy">Retornaremos com uma orientação inicial sobre os próximos passos.</p>
-              <p class="lead-form__success" role="status">Solicitação registrada para demonstração.</p>
-            </form>
-          </aside>
+              </a>
+            </div>
+            <p class="lp-hero__microcopy">Receba uma avaliação técnica da fachada e conheça o escopo mais adequado para o seu condomínio.</p>
+          </div>
+        </div>
+        <div class="lp-hero__strip">
+          <div class="container">
+            <p class="lp-hero__strip-title">O que você acompanha durante toda a obra</p>
+            <ul class="lp-hero__checklist">
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Cronograma estruturado
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Comunicação organizada
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Registro diário da execução
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Documentação técnica
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                Entrega formal com DataBook
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
-
       <section class="trust-strip" aria-label="Diferenciais técnicos da Latitud">
         <div class="container trust-strip__grid">
           <div class="trust-item">
@@ -823,75 +798,7 @@
 
     <footer class="footer">
       <div class="container">
-        <div class="footer__top">
-          <img class="footer__logo" src="Logos/Logo variação I (White).png" alt="Grupo Latitud">
-          <div class="footer__tagline">
-            <p>Soluções a Altura para Indústria e Condomínios.</p>
-            <p>Atendimento a nível <strong>Brasil</strong></p>
-          </div>
-        </div>
-        <div class="footer__grid">
-          <div class="footer__address">
-            <p class="footer__address-label">
-              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
-                <path d="M12 21s7-5.45 7-12A7 7 0 1 0 5 9c0 6.55 7 12 7 12Z"/>
-                <path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-              </svg>
-              <span>Nosso Endereço:</span>
-            </p>
-            <p>R. Frontino Alexandrino Freire, 94 - Parque Campolim, Sorocaba - SP, 18047-624</p>
-          </div>
-          <div class="footer__links">
-            <h3>Mapa do Site</h3>
-            <ul>
-              <li><a href="#topo">Início</a></li>
-              <li><a href="#diagnostico">Sobre Nós</a></li>
-              <li><a href="#solucoes">Serviços</a></li>
-              <li><a href="#cases">Cases</a></li>
-              <li><a href="#">Portal do Cliente</a></li>
-            </ul>
-          </div>
-          <div class="footer__links">
-            <h3>Fale Conosco</h3>
-            <ul class="footer__contacts">
-              <li>
-                <a href="mailto:contato@latitud.com.br">
-                  <span class="footer__contact-icon" aria-hidden="true">
-                    <img src="assets/img/footer-email-icon.svg" alt="">
-                  </span>
-                  <span>contato@latitud.com.br</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/550000000000">
-                  <span class="footer__contact-icon" aria-hidden="true">
-                    <img src="assets/img/footer-whatsapp-icon.svg" alt="">
-                  </span>
-                  <span>+55 (00) 0000-0000</span>
-                </a>
-              </li>
-              <li>
-                <a href="tel:+550000000000">
-                  <span class="footer__contact-icon" aria-hidden="true">
-                    <img src="assets/img/footer-phone-icon.svg" alt="">
-                  </span>
-                  <span>+55 (00) 0000-0000</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer__links">
-            <h3>Ajuda</h3>
-            <ul>
-              <li><a href="#contato">Contato</a></li>
-              <li><a href="#">Trabalhe Conosco</a></li>
-              <li><a href="#">Política de Termos</a></li>
-              <li><a href="#">Política de Privacidade</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer__bottom">
-          <p>© 2026 Grupo Latitud - Todos os direitos reservados. | CNPJ: 42.452.838/0001-66</p>
+        <div class="footer__content">
           <div class="footer__social" aria-label="Redes sociais">
             <a href="#" aria-label="Instagram">
               <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
@@ -914,6 +821,10 @@
               </svg>
             </a>
           </div>
+          <a class="footer__logo" href="#topo" aria-label="Grupo Latitud">
+            <img src="Logos/Logo variação I (White).png" alt="Grupo Latitud">
+          </a>
+          <p class="footer__copy">© 2026 Grupo Latitud. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

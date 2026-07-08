@@ -1,6 +1,6 @@
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 32px;
 }
 
@@ -86,7 +86,7 @@
   grid-auto-flow: column;
   gap: 24px;
   overflow-x: auto;
-  padding: 4px max(32px, calc((100vw - var(--container)) / 2)) 10px;
+  padding: 4px max(var(--grid-margin), calc((100vw - var(--container-max)) / 2)) 10px;
   scroll-snap-type: x mandatory;
 }
 
@@ -136,7 +136,7 @@
 
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(120px, 1fr));
+  grid-template-columns: 1fr;
   gap: 24px;
 }
 
@@ -153,21 +153,21 @@
   text-align: center;
 }
 
-@media (max-width: 960px) {
+/* ===== md — ≥ 768px ===== */
+@media (min-width: 48rem) {
   .cards-grid,
   .cert-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 600px) {
-  .cards-grid,
-  .cert-grid {
-    grid-template-columns: 1fr;
+/* ===== lg — ≥ 1024px ===== */
+@media (min-width: 64rem) {
+  .cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .portfolio-strip {
-    grid-auto-columns: minmax(280px, 82vw);
-    padding-inline: 20px;
+  .cert-grid {
+    grid-template-columns: repeat(6, minmax(120px, 1fr));
   }
 }

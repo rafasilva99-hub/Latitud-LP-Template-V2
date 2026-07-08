@@ -31,12 +31,42 @@
   --tracking-tag: .06em;
   --lh-hero: 56px;
 
-  --container: 1216px;
-  --section-py: 96px;
-  --section-py-mobile: 64px;
+  /* ===== Grid & breakpoints ===== */
+
+  /* Breakpoints — documentação/JS. NÃO funcionam dentro de @media */
+  --bp-sm: 40rem;   /* 640px  — auxiliar */
+  --bp-md: 48rem;   /* 768px  — estrutural */
+  --bp-lg: 64rem;   /* 1024px — estrutural */
+  --bp-xl: 80rem;   /* 1280px — container trava */
+
+  /* Container */
+  --container-max: 76rem;   /* 1216px */
+
+  /* Valores mobile-first (sobrescritos nas media queries abaixo) */
+  --grid-cols: 4;
+  --grid-gutter: 1rem;      /* 16px */
+  --grid-margin: 1rem;      /* 16px */
+
+  /* Espaçamento vertical fluido */
+  --section-space: clamp(3rem, 8vw, 6rem);
 
   --radius-btn: 12px;
   --radius-card: 16px;
   --radius-panel: 24px;
   --shadow-card: 0 1px 3px rgba(16, 24, 40, .06);
+}
+
+@media (min-width: 48rem) {  /* md — 768px */
+  :root {
+    --grid-cols: 8;
+    --grid-gutter: 1.5rem;  /* 24px */
+    --grid-margin: 2rem;    /* 32px */
+  }
+}
+
+@media (min-width: 64rem) {  /* lg — 1024px */
+  :root {
+    --grid-cols: 12;
+    --grid-gutter: 2rem;    /* 32px */
+  }
 }

@@ -5,6 +5,7 @@
   font-size: 14px;
   letter-spacing: -.14px;
   line-height: 1;
+  display: none;
 }
 
 .topbar__inner {
@@ -59,7 +60,7 @@
 
 .header {
   position: absolute;
-  inset: 42px 0 auto;
+  inset: 0 0 auto;
   z-index: 10;
 }
 
@@ -68,13 +69,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  padding-block: 16px;
+  padding-block: 14px;
 }
 
 .header__logo {
   display: block;
-  width: 176px;
-  height: 67px;
+  width: 152px;
+  height: 58px;
   flex: 0 0 auto;
 }
 
@@ -142,41 +143,46 @@
   backdrop-filter: blur(5px);
 }
 
-@media (max-width: 1040px) {
-  .topbar__social {
-    display: none;
-  }
+/* ===== Mobile-first: base = mobile ===== */
 
-  .header__toggle {
-    display: grid;
-    place-items: center;
-  }
-
-  .nav {
-    position: absolute;
-    inset: 99px 20px auto;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    border: 1px solid rgba(255, 255, 255, .12);
-    border-radius: 16px;
-    padding: 12px;
-    background: rgba(19, 23, 26, .96);
-    box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
-  }
-
-  .nav.is-open {
-    display: flex;
-  }
-
-  .nav a {
-    justify-content: space-between;
-    color: #fff;
-  }
+/* Below sm: topbar hidden, header at top */
+.topbar {
+  display: none;
 }
 
-@media (max-width: 640px) {
+.header {
+  top: 0;
+}
+
+.header__toggle {
+  display: grid;
+  place-items: center;
+}
+
+.nav {
+  position: absolute;
+  inset: 87px 20px auto;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(19, 23, 26, .96);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .22);
+}
+
+.nav.is-open {
+  display: flex;
+}
+
+.nav a {
+  justify-content: space-between;
+}
+
+/* sm — ≥ 640px */
+@media (min-width: 40rem) {
   .topbar {
     display: none;
   }
@@ -186,15 +192,44 @@
   }
 
   .header__inner {
-    padding-block: 14px;
+    padding-block: 16px;
   }
 
   .header__logo {
-    width: 152px;
-    height: 58px;
+    width: 176px;
+    height: 67px;
   }
 
   .nav {
-    top: 87px;
+    top: 99px;
+  }
+}
+
+/* Above nav breakpoint — ≥ 65rem (1040px) */
+@media (min-width: 65rem) {
+  .topbar__social {
+    display: flex;
+  }
+
+  .header__toggle {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 100px;
+    padding: 6px;
+    background: rgba(0, 0, 0, .08);
+    backdrop-filter: blur(5px);
+    box-shadow: none;
+  }
+
+  .nav a {
+    justify-content: center;
   }
 }
