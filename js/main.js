@@ -1,10 +1,9 @@
 const toggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const forms = document.querySelectorAll("[data-form]");
-const solutionCarousel = document.querySelector("[data-solution-carousel]");
-const solutionPrev = document.querySelector("[data-solution-prev]");
-const solutionNext = document.querySelector("[data-solution-next]");
-const solutionSectionContainer = solutionCarousel?.closest(".container");
+const solutionStack = document.querySelector("[data-solution-stack]");
+const solutionTabs = document.querySelectorAll("[data-solution-tab]");
+const solutionPanels = document.querySelectorAll("[data-solution-panel]");
 const caseShowcaseMedia = document.querySelector(".cases-showcase__media");
 const featuredCase = caseShowcaseMedia?.querySelector(".case-video--featured");
 const caseDeckPrevious = caseShowcaseMedia?.querySelector("[data-case-deck-prev]");
@@ -138,38 +137,25 @@ accordionItems.forEach((item) => {
   });
 });
 
-const scrollSolutions = (direction) => {
-  if (!solutionCarousel) return;
+const activateSolution = (index) => {
+  if (!solutionStack || !solutionPanels.length) return;
 
-  const card = solutionCarousel.querySelector(".solution-card");
-  const gap = parseFloat(getComputedStyle(solutionCarousel).gap) || 0;
-  const distance = card ? card.getBoundingClientRect().width + gap : 360;
+  solutionTabs.forEach((tab) => {
+    tab.classList.toggle("is-active", Number(tab.dataset.solutionTab) === index);
+  });
 
-  solutionCarousel.scrollBy({
-    left: direction * distance,
-    behavior: "smooth",
+  solutionPanels.forEach((card) => {
+    card.classList.toggle("is-active", Number(card.dataset.solutionPanel) === index);
   });
 };
 
-const updateSolutionScrollState = () => {
-  if (!solutionCarousel || !solutionSectionContainer) return;
+solutionTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activateSolution(Number(tab.dataset.solutionTab));
+  });
+});
 
-  const canScrollLeft = solutionCarousel.scrollLeft > 8;
-
-  solutionSectionContainer.classList.toggle(
-    "has-solution-scroll-left",
-    canScrollLeft
-  );
-
-  if (solutionPrev) {
-    solutionPrev.disabled = !canScrollLeft;
-  }
-};
-
-solutionPrev?.addEventListener("click", () => scrollSolutions(-1));
-solutionNext?.addEventListener("click", () => scrollSolutions(1));
-solutionCarousel?.addEventListener("scroll", updateSolutionScrollState, { passive: true });
-updateSolutionScrollState();
+activateSolution(0);
 
 const getVideoCase = (offset) => {
   return videoCases[(activeVideoCase + offset + videoCases.length) % videoCases.length];
@@ -218,11 +204,11 @@ const renderVideoCase = () => {
   caseLabel.textContent = currentCase.label;
 
   if (casePrev) {
-    casePrev.disabled = activeVideoCase === 0;
+    casePrev.disabled = false;
   }
 
   if (caseNext) {
-    caseNext.disabled = activeVideoCase === videoCases.length - 1;
+    caseNext.disabled = false;
   }
 };
 
@@ -238,11 +224,7 @@ const changeVideoCase = (direction) => {
     return;
   }
 
-  const nextVideoCase = activeVideoCase + direction;
-
-  if (nextVideoCase < 0 || nextVideoCase >= videoCases.length) {
-    return;
-  }
+  const nextVideoCase = (activeVideoCase + direction + videoCases.length) % videoCases.length;
 
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const updateActiveCase = () => {
@@ -277,3 +259,186 @@ const changeVideoCase = (direction) => {
 casePrev?.addEventListener("click", () => changeVideoCase(-1));
 caseNext?.addEventListener("click", () => changeVideoCase(1));
 renderVideoCase();
+
+/* Hotspot showcase interactivity */
+const hotspotData = [
+  {
+    title: "Desgaste visual e perda de proteção superficial",
+    text: "Quando a fachada apresenta desbotamento, manchas, variação de tonalidade ou aspecto de envelhecimento, isso geralmente indica que o sistema de pintura já perdeu sua eficiência de proteção.",
+  },
+  {
+    title: "Fissuras em revestimentos",
+    text: "Fissuras são manifestações comuns em fachadas, mas não devem ser ignoradas. Dependendo da origem e do comportamento, podem indicar movimentações estruturais, falhas de execução ou degradação do revestimento.",
+  },
+  {
+    title: "Descolamento de revestimentos",
+    text: "O desplacamento de argamassa, textura ou elementos cerâmicos indica perda de aderência entre camadas do sistema construtivo.",
+  },
+  {
+    title: "Manchas de umidade e sinais de infiltração",
+    text: "Manchas escuras, eflorescências ou áreas com alteração de cor geralmente indicam presença de umidade ativa na fachada.",
+  },
+  {
+    title: "Corrosão ou exposição de elementos estruturais",
+    text: "Quando há sinais de corrosão ou exposição de armaduras, o problema já ultrapassa o nível superficial e passa a exigir recuperação técnica do sistema afetado.",
+  },
+];
+
+const hotspotPins = document.querySelectorAll("[data-hotspot]");
+const hotspotCard = document.querySelector("[data-hotspot-card]");
+const hotspotTitle = document.querySelector("[data-hotspot-title]");
+const hotspotText = document.querySelector("[data-hotspot-text]");
+
+const positionCard = (pin) => {
+  if (!hotspotCard) return;
+  const pinTop = parseFloat(pin.style.top);
+  const pinLeft = parseFloat(pin.style.left);
+  const forceLeft = pin.hasAttribute("data-card-left");
+  const forceRight = pin.hasAttribute("data-card-right");
+  const cardOnRight = forceRight || (!forceLeft && pinLeft < 50);
+
+  hotspotCard.style.top = `${pinTop}%`;
+  if (cardOnRight) {
+    hotspotCard.style.left = `${pinLeft + 3}%`;
+    hotspotCard.style.right = "auto";
+  } else {
+    hotspotCard.style.right = `${100 - pinLeft + 1}%`;
+    hotspotCard.style.left = "auto";
+  }
+};
+
+const showCard = (pin) => {
+  const index = Number(pin.dataset.hotspot);
+  const data = hotspotData[index];
+  if (!data || !hotspotCard) return;
+
+  if (hotspotTitle) hotspotTitle.textContent = data.title;
+  if (hotspotText) hotspotText.textContent = data.text;
+  positionCard(pin);
+  hotspotCard.classList.remove("is-hidden");
+  pin.classList.add("is-active");
+};
+
+const hideCard = (pin) => {
+  if (!hotspotCard) return;
+  hotspotCard.classList.add("is-hidden");
+  pin.classList.remove("is-active");
+};
+
+let activePin = null;
+let hideTimeout = null;
+
+const scheduleHide = () => {
+  hideTimeout = setTimeout(() => {
+    if (activePin) {
+      hideCard(activePin);
+      activePin = null;
+    }
+  }, 200);
+};
+
+const cancelHide = () => {
+  if (hideTimeout) {
+    clearTimeout(hideTimeout);
+    hideTimeout = null;
+  }
+};
+
+hotspotPins.forEach((pin) => {
+  pin.addEventListener("mouseenter", () => {
+    cancelHide();
+
+    if (activePin && activePin !== pin) {
+      hideCard(activePin);
+    }
+
+    showCard(pin);
+    activePin = pin;
+  });
+
+  pin.addEventListener("mouseleave", () => {
+    scheduleHide();
+  });
+});
+
+if (hotspotCard) {
+  hotspotCard.addEventListener("mouseenter", () => {
+    cancelHide();
+  });
+
+  hotspotCard.addEventListener("mouseleave", () => {
+    scheduleHide();
+  });
+}
+
+// First hotspot active by default on page load
+const initialPin = document.querySelector(".hotspot-pin.is-active");
+if (initialPin && hotspotCard) {
+  showCard(initialPin);
+  activePin = initialPin;
+}
+
+/* Active nav link based on scroll position */
+const navLinks = document.querySelectorAll("[data-nav] a[href^='#']");
+const sectionIds = Array.from(navLinks).map((link) => link.getAttribute("href").slice(1));
+const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+
+const setActiveNav = (id) => {
+  navLinks.forEach((link) => {
+    if (link.getAttribute("href") === `#${id}`) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+if (sections.length) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveNav(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -50% 0px" }
+  );
+
+  sections.forEach((section) => navObserver.observe(section));
+}
+
+/* Header glass effect — scroll & contrast detection */
+const header = document.querySelector(".header");
+const heroBanner = document.querySelector(".lp-hero__banner");
+
+if (header) {
+  let lastOnDark = false;
+  let lastScrolled = false;
+
+  const updateHeader = () => {
+    const scrollY = window.scrollY;
+    const isScrolled = scrollY > 32;
+
+    if (isScrolled !== lastScrolled) {
+      header.classList.toggle("is-scrolled", isScrolled);
+      lastScrolled = isScrolled;
+    }
+
+    let isOnDark = false;
+
+    if (heroBanner) {
+      const bannerRect = heroBanner.getBoundingClientRect();
+      const headerMid = header.offsetHeight / 2;
+      isOnDark = bannerRect.top < headerMid && bannerRect.bottom > headerMid;
+    }
+
+    if (isOnDark !== lastOnDark) {
+      header.classList.toggle("is-on-dark", isOnDark);
+      lastOnDark = isOnDark;
+    }
+  };
+
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+}
