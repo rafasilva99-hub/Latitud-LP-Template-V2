@@ -1,9 +1,6 @@
 const toggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const forms = document.querySelectorAll("[data-form]");
-const solutionStack = document.querySelector("[data-solution-stack]");
-const solutionTabs = document.querySelectorAll("[data-solution-tab]");
-const solutionPanels = document.querySelectorAll("[data-solution-panel]");
 const caseShowcaseMedia = document.querySelector(".cases-showcase__media");
 const featuredCase = caseShowcaseMedia?.querySelector(".case-video--featured");
 const caseDeckPrevious = caseShowcaseMedia?.querySelector("[data-case-deck-prev]");
@@ -137,25 +134,50 @@ accordionItems.forEach((item) => {
   });
 });
 
-const activateSolution = (index) => {
-  if (!solutionStack || !solutionPanels.length) return;
+/* Solution sticky stack — scale down cards as they get covered */
+const solutionCards = document.querySelectorAll(".solution-card");
 
-  solutionTabs.forEach((tab) => {
-    tab.classList.toggle("is-active", Number(tab.dataset.solutionTab) === index);
-  });
+if (solutionCards.length) {
+  const scaleStep = 0.03;
+  const vh = window.innerHeight;
 
-  solutionPanels.forEach((card) => {
-    card.classList.toggle("is-active", Number(card.dataset.solutionPanel) === index);
-  });
-};
+  const updateSolutionStack = () => {
+    solutionCards.forEach((card, i) => {
+      const rect = card.getBoundingClientRect();
+      const stickyTop = 24 + i * 10;
+      const isStuck = rect.top <= stickyTop + 2;
 
-solutionTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    activateSolution(Number(tab.dataset.solutionTab));
-  });
-});
+      if (!isStuck) {
+        card.style.transform = "scale(1)";
+        return;
+      }
 
-activateSolution(0);
+      let totalShrink = 0;
+
+      for (let j = i + 1; j < solutionCards.length; j++) {
+        const nextRect = solutionCards[j].getBoundingClientRect();
+        const nextSticky = 24 + j * 10;
+        const distanceToStick = nextRect.top - nextSticky;
+        const travelRange = vh * 0.5;
+
+        if (distanceToStick <= 0) {
+          totalShrink += scaleStep;
+        } else if (distanceToStick < travelRange) {
+          totalShrink += scaleStep * (1 - distanceToStick / travelRange);
+          break;
+        } else {
+          break;
+        }
+      }
+
+      const scale = Math.max(1 - totalShrink, 0.88);
+      card.style.transform = `scale(${scale})`;
+    });
+  };
+
+  window.addEventListener("scroll", updateSolutionStack, { passive: true });
+  updateSolutionStack();
+}
 
 const getVideoCase = (offset) => {
   return videoCases[(activeVideoCase + offset + videoCases.length) % videoCases.length];
