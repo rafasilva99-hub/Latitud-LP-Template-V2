@@ -134,6 +134,28 @@ accordionItems.forEach((item) => {
   });
 });
 
+/* Method panel — expand on hover */
+const methodRows = document.querySelectorAll("[data-method-row]");
+
+let methodLeaveTimer = null;
+
+methodRows.forEach((row) => {
+  row.addEventListener("mouseenter", () => {
+    if (methodLeaveTimer) {
+      clearTimeout(methodLeaveTimer);
+      methodLeaveTimer = null;
+    }
+    methodRows.forEach((r) => r.classList.remove("is-expanded"));
+    row.classList.add("is-expanded");
+  });
+
+  row.addEventListener("mouseleave", () => {
+    methodLeaveTimer = setTimeout(() => {
+      row.classList.remove("is-expanded");
+    }, 150);
+  });
+});
+
 /* Solution sticky stack — scale down cards as they get covered */
 const solutionCards = document.querySelectorAll(".solution-card");
 
@@ -463,4 +485,23 @@ if (header) {
 
   window.addEventListener("scroll", updateHeader, { passive: true });
   updateHeader();
+}
+
+/* Scroll reveal */
+const revealElements = document.querySelectorAll(".reveal");
+
+if (revealElements.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+  );
+
+  revealElements.forEach((el) => revealObserver.observe(el));
 }
