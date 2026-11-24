@@ -2,40 +2,59 @@ const toggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
 const forms = document.querySelectorAll("[data-form]");
 const caseShowcaseMedia = document.querySelector(".cases-showcase__media");
-const featuredCase = caseShowcaseMedia?.querySelector(".case-video--featured");
-const caseDeckPrevious = caseShowcaseMedia?.querySelector("[data-case-deck-prev]");
-const caseDeckNext = caseShowcaseMedia?.querySelector("[data-case-deck-next]");
-const caseLabel = caseShowcaseMedia?.querySelector(".case-video__label");
+const caseComparison = caseShowcaseMedia?.querySelector("[data-case-comparison]");
+const caseBeforeImage = caseComparison?.querySelector(".case-comparison__img--before");
+const caseAfterImage = caseComparison?.querySelector(".case-comparison__img--after");
+const caseRange = caseComparison?.querySelector("[data-case-range]");
+const caseCount = caseComparison?.querySelector("[data-case-count]");
+const caseTitle = caseComparison?.querySelector("[data-case-title]");
+const caseLocation = caseComparison?.querySelector("[data-case-location]");
+const caseArea = caseComparison?.querySelector("[data-case-area]");
+const caseTime = caseComparison?.querySelector("[data-case-time]");
+const caseDelivery = caseComparison?.querySelector("[data-case-delivery]");
+const caseLabel = caseShowcaseMedia?.querySelector("[data-case-label]");
 const casePrev = document.querySelector("[data-case-prev]");
 const caseNext = document.querySelector("[data-case-next]");
+const solutionCarousel = document.querySelector("[data-solution-carousel]");
+const solutionTrack = solutionCarousel?.querySelector("[data-solution-track]");
+const solutionPrev = solutionCarousel?.querySelector("[data-solution-prev]");
+const solutionNext = solutionCarousel?.querySelector("[data-solution-next]");
 const accordionItems = document.querySelectorAll(".accordion__item");
 
-const videoCases = [
+const portfolioCases = [
   {
-    image: "assets/img/facade-painting-hero.png",
-    meta: ["Condomínio residencial", "Pintura de fachada"],
-    quote: "Planejamento, segurança e comunicação clara em todas as etapas da obra.",
-    label: "📍 Case em São Paulo",
-    playLabel: "Assistir case de pintura de fachada",
+    before: "assets/img/building-facade-iii.png",
+    after: "assets/img/building-facade-ii.png",
+    title: "Condomínio Riviera",
+    location: "Sorocaba / SP",
+    label: "Case em São Paulo",
+    area: "9.800 m²",
+    time: "12 semanas",
+    delivery: "100%",
   },
   {
-    image: "assets/img/card-recuperacao-fachada.png",
-    meta: ["Edifício comercial", "Recuperação técnica"],
-    quote: "Diagnóstico preciso para corrigir patologias antes da aplicação do acabamento.",
-    label: "📍 Case em Sorocaba",
-    playLabel: "Assistir case de recuperação técnica",
+    before: "assets/img/card-recuperacao-fachada.png",
+    after: "assets/img/facade-painting-hero.png",
+    title: "Edifício Saint Thomas",
+    location: "Campinas / SP",
+    label: "Case em Campinas",
+    area: "6.200 m²",
+    time: "10 semanas",
+    delivery: "100%",
   },
   {
-    image: "assets/img/card-pintura-fachada.png",
-    meta: ["Condomínio vertical", "Obra documentada"],
-    quote: "Execução acompanhada com RDO Digital, registros técnicos e entrega formal.",
-    label: "📍 Case em Campinas",
-    playLabel: "Assistir case de obra documentada",
+    before: "assets/img/building-facade.png",
+    after: "assets/img/hero-image.png",
+    title: "Condomínio La Vue",
+    location: "São Paulo / SP",
+    label: "Case em São Paulo",
+    area: "4.300 m²",
+    time: "8 semanas",
+    delivery: "98%",
   },
 ];
 
-let activeVideoCase = 0;
-let isVideoCaseAnimating = false;
+let activePortfolioCase = 0;
 
 toggle?.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("is-open");
@@ -134,175 +153,85 @@ accordionItems.forEach((item) => {
   });
 });
 
-/* Method panel — expand on hover */
-const methodRows = document.querySelectorAll("[data-method-row]");
-
-let methodLeaveTimer = null;
-
-methodRows.forEach((row) => {
-  row.addEventListener("mouseenter", () => {
-    if (methodLeaveTimer) {
-      clearTimeout(methodLeaveTimer);
-      methodLeaveTimer = null;
-    }
-    methodRows.forEach((r) => r.classList.remove("is-expanded"));
-    row.classList.add("is-expanded");
-  });
-
-  row.addEventListener("mouseleave", () => {
-    methodLeaveTimer = setTimeout(() => {
-      row.classList.remove("is-expanded");
-    }, 150);
-  });
-});
-
-/* Solution sticky stack — scale down cards as they get covered */
-const solutionCards = document.querySelectorAll(".solution-card");
-
-if (solutionCards.length) {
-  const scaleStep = 0.03;
-  const vh = window.innerHeight;
-
-  const updateSolutionStack = () => {
-    solutionCards.forEach((card, i) => {
-      const rect = card.getBoundingClientRect();
-      const stickyTop = 24 + i * 10;
-      const isStuck = rect.top <= stickyTop + 2;
-
-      if (!isStuck) {
-        card.style.transform = "scale(1)";
-        return;
-      }
-
-      let totalShrink = 0;
-
-      for (let j = i + 1; j < solutionCards.length; j++) {
-        const nextRect = solutionCards[j].getBoundingClientRect();
-        const nextSticky = 24 + j * 10;
-        const distanceToStick = nextRect.top - nextSticky;
-        const travelRange = vh * 0.5;
-
-        if (distanceToStick <= 0) {
-          totalShrink += scaleStep;
-        } else if (distanceToStick < travelRange) {
-          totalShrink += scaleStep * (1 - distanceToStick / travelRange);
-          break;
-        } else {
-          break;
-        }
-      }
-
-      const scale = Math.max(1 - totalShrink, 0.88);
-      card.style.transform = `scale(${scale})`;
-    });
+if (solutionTrack && solutionPrev && solutionNext) {
+  const getSolutionStep = () => {
+    const card = solutionTrack.querySelector(".solution-card");
+    if (!card) return solutionTrack.clientWidth;
+    const gap = Number.parseFloat(getComputedStyle(solutionTrack).columnGap) || 0;
+    return card.getBoundingClientRect().width + gap;
   };
 
-  window.addEventListener("scroll", updateSolutionStack, { passive: true });
-  updateSolutionStack();
+  const updateSolutionControls = () => {
+    const maxScroll = solutionTrack.scrollWidth - solutionTrack.clientWidth - 2;
+    solutionPrev.disabled = solutionTrack.scrollLeft <= 2;
+    solutionNext.disabled = solutionTrack.scrollLeft >= maxScroll;
+  };
+
+  solutionPrev.addEventListener("click", () => {
+    solutionTrack.scrollBy({ left: -getSolutionStep(), behavior: "smooth" });
+  });
+
+  solutionNext.addEventListener("click", () => {
+    solutionTrack.scrollBy({ left: getSolutionStep(), behavior: "smooth" });
+  });
+
+  solutionTrack.addEventListener("scroll", updateSolutionControls, { passive: true });
+  window.addEventListener("resize", updateSolutionControls);
+  updateSolutionControls();
 }
 
-const getVideoCase = (offset) => {
-  return videoCases[(activeVideoCase + offset + videoCases.length) % videoCases.length];
-};
+const setCaseSplit = (value) => {
+  if (!caseComparison) return;
 
-const renderCaseCard = (card, caseData, isFeatured = false) => {
-  if (!card) return;
+  const split = Math.min(92, Math.max(8, Number(value) || 50));
+  caseComparison.style.setProperty("--case-split", `${split}%`);
 
-  const media = card.querySelector(".case-video__media");
-  const metaItems = card.querySelectorAll(".case-video__meta span");
-  const quote = card.querySelector(".case-video__quote");
-  const play = card.querySelector(".case-video__play");
-  const [primaryMeta, secondaryMeta] = caseData.meta;
-
-  if (!media) return;
-
-  media.style.backgroundImage = `
-    linear-gradient(180deg, rgba(19, 23, 26, .28), rgba(19, 23, 26, .42)),
-    url("${caseData.image}")
-  `;
-
-  if (metaItems.length >= 2) {
-    metaItems[0].textContent = primaryMeta;
-    metaItems[1].textContent = secondaryMeta;
-  }
-
-  if (quote) {
-    quote.textContent = caseData.quote;
-  }
-
-  if (isFeatured) {
-    play?.setAttribute("aria-label", caseData.playLabel);
+  if (caseRange) {
+    caseRange.value = String(split);
   }
 };
 
-const renderVideoCase = () => {
-  if (!featuredCase || !caseDeckPrevious || !caseDeckNext || !caseLabel) return;
+const renderPortfolioCase = () => {
+  if (!caseComparison) return;
 
-  const currentCase = getVideoCase(0);
-  const previousCase = getVideoCase(-1);
-  const nextCase = getVideoCase(1);
+  const currentCase = portfolioCases[activePortfolioCase];
+  const currentIndex = String(activePortfolioCase + 1).padStart(2, "0");
+  const totalCases = String(portfolioCases.length).padStart(2, "0");
 
-  renderCaseCard(featuredCase, currentCase, true);
-  renderCaseCard(caseDeckPrevious, previousCase);
-  renderCaseCard(caseDeckNext, nextCase);
-  caseLabel.textContent = currentCase.label;
-
-  if (casePrev) {
-    casePrev.disabled = false;
+  if (caseBeforeImage) {
+    caseBeforeImage.src = currentCase.before;
+    caseBeforeImage.alt = `Fachada antes da intervenção técnica no ${currentCase.title}`;
   }
 
-  if (caseNext) {
-    caseNext.disabled = false;
+  if (caseAfterImage) {
+    caseAfterImage.src = currentCase.after;
+    caseAfterImage.alt = `Fachada depois da intervenção técnica no ${currentCase.title}`;
   }
+
+  if (caseCount) caseCount.textContent = `${currentIndex} / ${totalCases}`;
+  if (caseTitle) caseTitle.textContent = currentCase.title;
+  if (caseLocation) caseLocation.textContent = currentCase.location;
+  if (caseLabel) caseLabel.textContent = currentCase.label;
+  if (caseArea) caseArea.textContent = currentCase.area;
+  if (caseTime) caseTime.textContent = currentCase.time;
+  if (caseDelivery) caseDelivery.textContent = currentCase.delivery;
+
+  setCaseSplit(50);
 };
 
-const changeVideoCase = (direction) => {
-  if (
-    !caseShowcaseMedia ||
-    !featuredCase ||
-    !caseDeckPrevious ||
-    !caseDeckNext ||
-    !caseLabel ||
-    isVideoCaseAnimating
-  ) {
-    return;
-  }
-
-  const nextVideoCase = (activeVideoCase + direction + videoCases.length) % videoCases.length;
-
-  const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const updateActiveCase = () => {
-    activeVideoCase = nextVideoCase;
-    renderVideoCase();
-  };
-
-  if (shouldReduceMotion) {
-    updateActiveCase();
-    return;
-  }
-
-  isVideoCaseAnimating = true;
-  caseShowcaseMedia.classList.add(
-    direction > 0 ? "is-case-exiting-next" : "is-case-exiting-prev"
-  );
-
-  window.setTimeout(() => {
-    updateActiveCase();
-    caseShowcaseMedia.classList.remove("is-case-exiting-next", "is-case-exiting-prev");
-    caseShowcaseMedia.classList.add(
-      direction > 0 ? "is-case-entering-next" : "is-case-entering-prev"
-    );
-
-    window.setTimeout(() => {
-      caseShowcaseMedia.classList.remove("is-case-entering-next", "is-case-entering-prev");
-      isVideoCaseAnimating = false;
-    }, 380);
-  }, 220);
+const changePortfolioCase = (direction) => {
+  activePortfolioCase =
+    (activePortfolioCase + direction + portfolioCases.length) % portfolioCases.length;
+  renderPortfolioCase();
 };
 
-casePrev?.addEventListener("click", () => changeVideoCase(-1));
-caseNext?.addEventListener("click", () => changeVideoCase(1));
-renderVideoCase();
+caseRange?.addEventListener("input", (event) => {
+  setCaseSplit(event.currentTarget.value);
+});
+
+casePrev?.addEventListener("click", () => changePortfolioCase(-1));
+caseNext?.addEventListener("click", () => changePortfolioCase(1));
+renderPortfolioCase();
 
 /* Hotspot showcase interactivity */
 const hotspotData = [
@@ -450,41 +379,6 @@ if (sections.length) {
   );
 
   sections.forEach((section) => navObserver.observe(section));
-}
-
-/* Header glass effect — scroll & contrast detection */
-const header = document.querySelector(".header");
-const heroBanner = document.querySelector(".lp-hero__banner");
-
-if (header) {
-  let lastOnDark = false;
-  let lastScrolled = false;
-
-  const updateHeader = () => {
-    const scrollY = window.scrollY;
-    const isScrolled = scrollY > 32;
-
-    if (isScrolled !== lastScrolled) {
-      header.classList.toggle("is-scrolled", isScrolled);
-      lastScrolled = isScrolled;
-    }
-
-    let isOnDark = false;
-
-    if (heroBanner) {
-      const bannerRect = heroBanner.getBoundingClientRect();
-      const headerMid = header.offsetHeight / 2;
-      isOnDark = bannerRect.top < headerMid && bannerRect.bottom > headerMid;
-    }
-
-    if (isOnDark !== lastOnDark) {
-      header.classList.toggle("is-on-dark", isOnDark);
-      lastOnDark = isOnDark;
-    }
-  };
-
-  window.addEventListener("scroll", updateHeader, { passive: true });
-  updateHeader();
 }
 
 /* Scroll reveal */

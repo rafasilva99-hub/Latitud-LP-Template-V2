@@ -20,6 +20,7 @@ Classificação das informações:
 | Jul/2026 | 1.0 | Versão inicial: sistema extraído da home 1440 + brandbook, incluindo blueprint de conteúdo das LPs. |
 | Jul/2026 | 1.1 | **Escopo refinado a pedido:** removidos blueprint de seções, matriz de conteúdo e diretrizes de conversão. Documento passa a cobrir apenas ID visual, tokens e componentes. Pendências de conteúdo retiradas. |
 | Jul/2026 | 1.2 | Resoluções: fonte (Helvetica via sistema + Inter self-host, `@font-face` definido); neutro único `#FFFFFF` base + `#FAFAFA` reservado a hover; botão em preto não existe (só navy); `--action-blue #155EEF` promovido a token oficial; forma (raios/sombras) fixada como decisão de design; H1 do hero em LH 48/56. Pendência de copy (segmented control) descartada por estar fora do escopo. Todas as decisões de design fechadas. |
+| Jul/2026 | 1.3 | Padronização de grid e escala: container web passa a 1280px; margem mobile fixada em 24px; escala tipográfica aplicada de forma mais compacta para LP, com H1 até 40px, H2 até 32px, textos longos em 16px e textos de apoio destacados em 17px. |
 
 ---
 
@@ -190,21 +191,22 @@ Se o cliente aprovar a licença webfont da Helvetica no futuro, cria-se `assets/
 | Navegação | Text md | Raleway Medium | `#FFFFFF` sobre hero |
 | Topbar / footer secundário | Text sm (14/20) | Helvetica Neue Regular | `#D5D7DA` |
 
-> **Line-height do H1 do hero — decisão firme:** o pitch medido na home é ≈56px [FATO], mais apertado que os 60px padrão de Display lg. Para títulos curtos e impactantes de hero, LH mais justo é a prática correta (o LH da escala é otimizado para blocos de texto longos). **Adotado: 48/56 (1.167).** Aplica-se apenas ao H1 do hero — os demais títulos seguem a escala da tabela 2.2. Token dedicado: `--lh-hero: 56px`.
+> **Line-height do H1 do hero — decisão firme:** o pitch medido na home original é ≈56px [FATO]. Para esta LP compacta, o H1 usa proporção equivalente em token unitário: `--lh-hero: 1.15`. Aplica-se apenas ao H1 do hero — os demais títulos seguem a escala da tabela 2.2 reduzida.
 
-**Responsivo [INFERÊNCIA — regra de redução]:** H1 48→36 (display-md, LH 44), H2 36→30 (display-sm), sub 20→18. Corpo permanece 16. Nunca abaixo de 16px em corpo/inputs (evita zoom no iOS).
+**Responsivo [INFERÊNCIA — regra de redução]:** para esta LP, usar escala compacta: H1 40→32, H2 32→26, H3 26→22, subtítulos 17→16. Corpo e inputs permanecem em 16px. Nunca abaixo de 16px em corpo/inputs (evita zoom no iOS). Elementos auxiliares podem usar 14px, e microcopy 12–13px.
 
 ### 2.3 Grid, container e espaçamento
 
 - **Canvas de referência:** 1440px. [FATO]
-- **Container de conteúdo: 1216px** (margens de 112px em cada lado @1440) — medido em topbar, H2s, painel CTA e footer [FATO]. Implementar como `max-width: 1216px; margin-inline: auto; padding-inline: 32px`.
-- **Grid:** 12 colunas, gutter 32px [INFERÊNCIA — compatível com as larguras medidas].
+- **Container de conteúdo web: 1280px** — decisão de padronização para esta LP. Implementar como `max-width: 1280px; margin-inline: auto; padding-inline` por token de margem.
+- **Grid:** 12 colunas no desktop, 8 colunas no tablet, 4 colunas no mobile. Gutter desktop 32px; tablet 24px; mobile 16px.
+- **Margem mobile:** 24px fixos nas bordas (`--grid-margin: 1.5rem`) para evitar conteúdo colado em telas estreitas.
 - **Cabeçalho de seção em 2 colunas** [FATO]: eyebrow + H2 à esquerda (~6 col), parágrafo de apoio alinhado à direita (~5 col a partir de x≈996).
 - **Escala de espaçamento (base 4):** 4 · 8 · 12 · 16 · 24 · 32 · 40 · 48 · 64 · 80 · 96 · 128.
 - **Ritmo vertical de seção:** padding-block ≈ **96px** desktop / 64px mobile [FATO — faixa de certificações mede 476px de altura total; painel CTA ≈350px]. Usar 128 quando a seção precisar respirar.
 - **Alturas medidas [FATO]:** topbar 42px · header sobreposto ~88px de zona útil · hero ≈533px do topo da página · painel CTA ≈350px.
 
-**Breakpoints [INFERÊNCIA]:** 1440 (design) · 1280 · 1024 · 768 · 480. Carrosséis viram scroll-snap horizontal no touch.
+**Breakpoints [INFERÊNCIA]:** 1280 (container web) · 1024 · 768 · 480. Carrosséis viram scroll-snap horizontal no touch.
 
 ### 2.4 Raio, borda, sombra e o corte diagonal
 

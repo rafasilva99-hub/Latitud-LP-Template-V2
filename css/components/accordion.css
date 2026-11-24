@@ -8,13 +8,13 @@
 
 .accordion__item summary {
   display: flex;
-  min-height: 76px;
+  min-height: 68px;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   color: var(--text-heading);
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: var(--fs-body-large);
   font-weight: 600;
   list-style: none;
   cursor: pointer;

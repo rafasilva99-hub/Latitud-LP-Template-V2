@@ -1,10 +1,10 @@
 .hero {
   position: relative;
-  min-height: 680px;
+  min-height: 620px;
   display: grid;
   align-items: end;
   overflow: hidden;
-  padding: 136px 0 72px;
+  padding: 128px 0 64px;
   background: var(--black);
   color: #fff;
 }
@@ -39,9 +39,9 @@
   margin: 16px 0 20px;
   color: #fff;
   font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-size: var(--fs-hero-title);
   font-weight: 600;
-  line-height: 1.22;
+  line-height: var(--lh-hero);
   letter-spacing: var(--tracking-display);
 }
 
@@ -49,7 +49,7 @@
   max-width: 620px;
   margin: 0 0 32px;
   color: rgba(255, 255, 255, .88);
-  font-size: 18px;
+  font-size: var(--fs-body-large);
   line-height: 1.5;
 }
 
@@ -71,13 +71,13 @@
   margin: 12px 0 18px;
   color: var(--text-heading);
   font-family: var(--font-heading);
-  font-size: clamp(1.875rem, 3vw, 2.25rem);
-  line-height: 1.22;
+  font-size: var(--fs-section-title);
+  line-height: var(--lh-display);
 }
 
 .about-copy p {
   margin: 0 0 28px;
-  font-size: 18px;
+  font-size: var(--fs-body-large);
 }
 
 .chips-grid {
@@ -146,7 +146,7 @@
 .step__number {
   color: var(--blue-50);
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: var(--display-xs);
   font-weight: 700;
 }
 
@@ -191,7 +191,7 @@
   max-width: 800px;
   margin: 18px auto 38px;
   color: var(--text-body);
-  font-size: 20px;
+  font-size: var(--text-xl);
   line-height: 1.5;
 }
 
@@ -263,8 +263,8 @@
   grid-template-columns: 1fr;
   gap: 32px;
   align-items: center;
-  min-height: 420px;
-  padding: 32px;
+  min-height: 380px;
+  padding: 28px;
 }
 
 .cta-panel h2 {
@@ -272,15 +272,15 @@
   margin: 14px 0 16px;
   color: #fff;
   font-family: var(--font-heading);
-  font-size: clamp(1.875rem, 3vw, 2.25rem);
-  line-height: 1.22;
+  font-size: var(--fs-section-title);
+  line-height: var(--lh-display);
 }
 
 .cta-panel p {
   max-width: 590px;
   margin: 0 0 28px;
   color: rgba(255, 255, 255, .85);
-  font-size: 18px;
+  font-size: var(--fs-body-large);
 }
 
 @keyframes marquee {
@@ -322,8 +322,8 @@
 /* ===== md — ≥ 768px ===== */
 @media (min-width: 48rem) {
   .hero {
-    min-height: 620px;
-    padding: 136px 0 96px;
+    min-height: 580px;
+    padding: 128px 0 80px;
   }
 
   .hero h1 {
@@ -334,23 +334,23 @@
 /* ===== lg — ≥ 1024px ===== */
 @media (min-width: 64rem) {
   .hero {
-    min-height: 675px;
-    padding: 180px 0 96px;
+    min-height: 620px;
+    padding: 160px 0 88px;
   }
 
   .about-grid {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
-    gap: 64px;
+    gap: 56px;
   }
 
   .steps {
     grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
-    gap: 64px;
+    gap: 56px;
   }
 
   .cta-panel__inner {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
-    gap: 56px;
-    padding: 48px;
+    gap: 48px;
+    padding: 40px;
   }
 }
